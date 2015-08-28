@@ -1,0 +1,67 @@
+#ifndef _JTAG_SIGNAL_
+#define _JTAG_SIGNAL_
+
+#include "/root/benchDebugger/src/headers_4W/global.hp"
+
+// ***************************************
+// *      JTAG   Definitions  (8MHz)     *
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+
+.macro JTAG
+.mparam signal
+	LDI INPUT_SIGNAL_W0,((signal & 0b00011110)<<8) | signal
+    JAL R9.w0, JTAG_CALL
+.endm
+
+JTAG_CALL:
+	MOV R30.b0, INPUT_SIGNAL_B1                      // Set pins without clock
+    LDI TIMER_LOOP, 1                                //Store 3 in loop register and also spend 5ns
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+	MOV R30.b0, INPUT_SIGNAL_B0                       // Set the clock according to signal (high if present)
+	LDI TIMER_LOOP, 3                                 // Set loop counter to 3 (5ns)
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+	MOV R30.b0, INPUT_SIGNAL_B1
+	JMP R9.w0
+
+
+.macro JTAG_IN
+.mparam signal
+	LDI INPUT_SIGNAL_W0,((signal & 0b00011110)<<8) | signal
+    JAL R9.w0, JTAG_IN_CALL
+.endm
+
+JTAG_IN_CALL:
+	MOV R30.b0, INPUT_SIGNAL_B1      					// Set pins without clock
+    LDI TIMER_LOOP, 1	    	  						//Store 3 in loop register and also spend 5ns
+ 	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	MOV R30.b0, INPUT_SIGNAL_B0  			    // Set the clock according to signal (high if present)
+	WBS READER_READY							//Wait for PRU0 to set READER_READY to high
+	SET DATA_READY								//Indicate the data is ready to be read
+
+	LDI TIMER_LOOP, 1	    	  						//Store 3 in loop register and also spend 5ns
+ 	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	//WBS DATA_RECEIVED
+	CLR DATA_READY
+
+	MOV R30.b0, INPUT_SIGNAL_B1
+	JMP R9.w0
+
+.macro JTAG_END
+	WBS READER_READY							//Wait for PRU0 to set READER_READY to high
+	MOV     r31.b0, PRU1_PRU0_INTERRUPT+16      //Create the interrupt on PRU_0
+	SET DATA_READY
+	LDI TIMER_LOOP, 3	    	  						//Store 3 in loop register and also spend 5ns
+ 	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+	CLR DATA_READY
+.endm
+
+
+#endif //_JTAG_SIGNAL_

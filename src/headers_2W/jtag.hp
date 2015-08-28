@@ -1,0 +1,152 @@
+#ifndef _JTAG_SIGNAL_
+#define _JTAG_SIGNAL_
+
+#include "/root/benchDebugger/src/headers_2W/global.hp"
+#define OUTPUT_MASK   	0x18
+#define TDO_MASK   		0x80
+
+// ***************************************
+// *      JTAG 2W Definitions (8MHz)     *
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+
+// ONE MACRO FOR A SET OF 4 INPUTS TEST, TMS, TDI AND TDO
+.macro JTAG_2W_COMBI
+.mparam TST, TMS, TDI, TDO=0
+	MOV INPUT_SIGNAL_W0, ((TDO<<3|1<<1|TMS)<<2|(TST<<1|TMS))<<8|((1<<1|TDI)<<2|(TST<<1|TDI))
+    JAL R9.w0, JTAG_2W_COMBI_CALL
+.endm
+
+//JTAG_2W_COMBI_CALL:
+//	// Send TMS
+//	AND R30.b0, INPUT_SIGNAL_B1, OUTPUT_MASK           	//15 ==>Set pins with TEST HIGH
+//	LSL INPUT_SIGNAL_B1, INPUT_SIGNAL_B1, 2				//20
+//	MOV INPUT_SIGNAL_B1, INPUT_SIGNAL_B1				//25
+//	LDI TIMER_LOOP, 4                                 	//30
+//	AND R30.b0, INPUT_SIGNAL_B1, OUTPUT_MASK           	//35 ==> Set the Pins with TEST
+//	CALL WAIT_NS										//35+50=85
+//	LDI TIMER_LOOP, 1									//90
+//	SET TEST											//95
+//
+//JTAG_2W_CALL_TDI:
+//	CALL WAIT_15NS										//95+15=10
+//
+//	// SEND TDI
+//	AND R30.b0, INPUT_SIGNAL_B0, OUTPUT_MASK			//15
+//	LSL INPUT_SIGNAL_B0, INPUT_SIGNAL_B0, 2				//20
+//	MOV INPUT_SIGNAL_B0, INPUT_SIGNAL_B0				//25
+//	LDI TIMER_LOOP, 4                                 	//30
+//	AND R30.b0, INPUT_SIGNAL_B0, OUTPUT_MASK           	//35 ==> Set the Pins with TEST
+//	CALL WAIT_NS										//35+50=85
+//	LDI TIMER_LOOP, 4									//90
+//	SET TEST											//95
+//
+//JTAG_2W_CALL_TDO:
+//	QBBS JTAG_2W_CALL_TDO_IN, INPUT_SIGNAL_B1.t7		//100 Check if TDO is to be recorded
+//	CALL WAIT_10NS										//10
+//	//DONT RCEIVE TDO
+//	CLR RST_OUT											//15
+//	CALL WAIT_15NS										//15+15=30
+//	CLR TEST											//35 ==>Test LOW
+//	CALL WAIT_NS										//35+50=85
+//	LDI TIMER_LOOP, 1									//90
+//	SET TEST											//95
+//	JMP R9.w0											//100 end
+//
+//
+//JTAG_2W_CALL_TDO_IN:
+//	//RECORD TDO
+//	CALL WAIT_15NS										//15
+//	WBS READER_READY									//20 Wait for PRU0 to set READER_READY to high
+//	SET DATA_READY										//25 Indicate the data is ready to be read
+//	CLR RST_OUT											//30 waste one cycle
+//	CLR TEST											//35 ==>Test LOW
+//	LDI TIMER_LOOP, 3									//40
+//	CLR DATA_READY										//45
+//	CALL WAIT_NS										//45+40=85
+//	LDI TIMER_LOOP, 1									//90
+//	SET TEST											//95
+//	JMP R9.w0											//100 end
+//
+
+
+// ONE MACRO FOR ONLY 2 INPUTS TEST AND RST_OUT
+.macro JTAG
+.mparam TST, RST
+	MOV INPUT_SIGNAL_W0, ((1<<1|RST<<2)<<2|(TST<<1|RST<<2))
+    JAL R9.w0, JTAG_2W_SINGLE_CALL
+.endm
+
+JTAG_2W_SINGLE_CALL:
+	// Send TMS
+	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//15 ==>Set pins with TEST HIGH
+	LSL INPUT_SIGNAL_W0, INPUT_SIGNAL_W0, 2				//20
+	MOV INPUT_SIGNAL_W0, INPUT_SIGNAL_W0				//25
+	LDI TIMER_LOOP, 4                                 	//30
+
+	LDI TIMER_LOOP, 2000
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//35 ==> Set the Pins with TEST
+	CALL WAIT_NS										//35+50=85
+	LDI TIMER_LOOP, 1									//90
+
+	LDI TIMER_LOOP, 2000
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	SET TEST											//95
+	JMP R9.W0											//100 END
+
+
+// ONE MACRO FOR ONLY 2 INPUTS TEST AND RST_OUT
+.macro JTAG_IN
+.mparam TST, RST=0
+	MOV INPUT_SIGNAL_W0, ((1<<1|RST<<2)<<2|(TST<<1|RST<<2))
+    JAL R9.w0, JTAG_2W_SINGLE_IN_CALL
+.endm
+
+JTAG_2W_SINGLE_IN_CALL:
+	// Send TMS
+	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//15 ==>Set pins with TEST HIGH
+
+	LDI TIMER_LOOP, 2000
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	WBS READER_READY									//20 Wait for PRU0 to set READER_READY to high
+	CLR RST_OUT											//30 waste one cycle
+	CLR TEST											//35 ==>Test LOW
+
+	LDI TIMER_LOOP, 20
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	SET DATA_READY										//25 Indicate the data is ready to be read
+
+	LDI TIMER_LOOP, 1500
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+
+	LDI TIMER_LOOP, 3									//40
+	CLR DATA_READY										//45
+	CALL WAIT_NS										//45+40=85
+	LDI TIMER_LOOP, 1									//90
+	SET TEST											//95
+	JMP R9.w0											//100 end
+
+
+
+.macro JTAG_END
+	WBS READER_READY							//Wait for PRU0 to set READER_READY to high
+	MOV     r31.b0, PRU1_PRU0_INTERRUPT+16      //Create the interrupt on PRU_0
+	SET DATA_READY
+	LDI TIMER_LOOP, 3	    	  				//Store 3 in loop register and also spend 5ns
+ 	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+	CLR DATA_READY
+.endm
+
+
+#endif //_JTAG_SIGNAL_

@@ -1,0 +1,1373 @@
+//#include "ATE_pre2at_probe.edt"
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+
+vector ( $tset, TEST, TCK, TMS, TDI, TDO, RST     )
+{
+
+//                                   T T T T T R
+//                                   E C M D D S
+//                                   S K S I O T
+//                                   T          
+//                                              
+
+//; Header_Start==================================================================
+//;---------------------------------------------------------------------------;
+//;                                                                           ;
+//;  Project:  FR59xx BOOT CODE: boot code test pattern                       ;
+//;   Author:  a0406323 Eric Loeffler                                         ;
+//;  Created:  02/11/2013                                                     ;
+//;                                                                           ;
+//;  (C) Texas Instruments, Deutschland GmbH, 2013                            ;
+//;      MSP430  Design                                                       ;
+//;      All Rights Reserved.                                                 ;
+//;                                                                           ;
+//;      *** TI Confidential - NDA Restrictions ***                           ;
+//;                                                                           ;
+//;---------------------------------------------------------------------------;
+//; Extended Description:
+//;
+//; 1. switch to AT-PROBE state via PSWD
+//; 2. wait for mass erase to be complete
+//; 3. check for AT-PROBE state via JMB
+//;
+//;---------------------------------------------------------------------------;
+//; check for PRE-PROBE state
+//;---------------------------------------------------------------------------;
+//; Header_End====================================================================
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 255       > FIX1US            1 0 0 1 X 1  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            0 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG              1 0 0 1 X 1  ; // TDIset1 
+                 > JTAG              1 0 1 1 X 1  ; // TMSset1 
+//;    // Clock TCK six (6) times
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG              1 0 0 1 X 1  ; // TMSset0 
+                 > JTAG              1 1 0 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+
+//; ask for password check (write 0xA55AC3C3 to JMBIN) with next Boot Code execution
+//#include "i_JmbExchange.edt" 0011 0003 0003
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0011 R:0x0003 M:0x0003 ;d:0011
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 1 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" A55A ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xA55A R:0xffff M:0xffff ;d:A55A
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 1 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" C3C3 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xC3C3 R:0xffff M:0xffff ;d:C3C3
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 1 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+//#include "i_StopJtag.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        StopJtag
+
+//;// Description:
+
+//;// Reset TAP controller and release TEST signal
+
+//;//*****************************************************************************
+
+
+
+//; put RSTNMI and TEST pin to normal operation condition
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+//; JTAG stopped
+
+
+
+
+//; ---------------------------------------------------------------------
+//; Restart device with AT-Probe PSWD request in JTAG Mail Box, enter PSWD
+//; ---------------------------------------------------------------------
+
+//#include "i_Rstnmi.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        Rstnmi
+
+//;// Description:
+
+//;// Assert RSTNMI pin to issue power up reset
+
+//;//*****************************************************************************
+
+
+
+//; #v:     jtag.rst_nmi = 1'b0;
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US            0 0 0 1 X 0  ; // FIX1US
+
+//; #v:     jtag.rst_nmi = 1'b1;
+
+
+// Delay W:0x2DC6C0
+repeat 3000      > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+// Delay W:0x4FFFF
+repeat 327       > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 255       > FIX1US            1 0 0 1 X 1  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            0 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG              1 0 0 1 X 1  ; // TDIset1 
+                 > JTAG              1 0 1 1 X 1  ; // TMSset1 
+//;    // Clock TCK six (6) times
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG              1 0 0 1 X 1  ; // TMSset0 
+                 > JTAG              1 1 0 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+
+//; check that we are NOT in PRE-PROBE (JMBOUT0 not set)
+//#include "i_JmbExchange.edt" 0000 0000 0004
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0000 R:0x0000 M:0x0004 ;d:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 L 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//; JMB accepted?
+//; enter 128 bit PASSWORD via JMB
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 92e3 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x92e3 R:0xffff M:0xffff ;d:92e3
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 0 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 1 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 5f42 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x5f42 R:0xffff M:0xffff ;d:5f42
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 1 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 1 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 2bdd ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x2bdd R:0xffff M:0xffff ;d:2bdd
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 1 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 1 H 1  ; // Bit 3
+                 > JTAG              1 1 0 1 H 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 1d52 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x1d52 R:0xffff M:0xffff ;d:1d52
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 1 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 75c0 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x75c0 R:0xffff M:0xffff ;d:75c0
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 1 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 11ef ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x11ef R:0xffff M:0xffff ;d:11ef
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 1 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 1 H 1  ; // Bit 3
+                 > JTAG              1 1 0 1 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 37f3 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x37f3 R:0xffff M:0xffff ;d:37f3
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 1 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 1 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// Delay W:0x8000
+repeat 32        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+//#include "i_Set_JmbInCtl.edt" 0001
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        Set_JmbInCtl
+//;// Description:
+//;// This macro writes/reads the JMBINCTL register (if applied at appropriate time)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMBINCTL register
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0001 R:0x0000 M:0x0000 ;d:0001
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" c35b ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xc35b R:0xffff M:0xffff ;d:c35b
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 1 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 1 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 1 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+//; ---------------------------------------------------------------------
+//; Wait for mass erase to finish
+//; ---------------------------------------------------------------------
+
+// Delay W:0x400FFFF
+repeat 65536     > FIX1US            1 0 0 1 X 1  ; // FIX1US
+repeat 1638      > FIX1US            1 0 0 1 X 1  ; // FIX1US
+
+//; ---------------------------------------------------------------------
+//; check for AT-PROBE state
+//; ---------------------------------------------------------------------
+
+//; check for AT-PROBE state (read 0xB3B3 from JMBOUT0)
+//#include "i_JmbExchange.edt" 0004 0004 0004
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0004 R:0x0004 M:0x0004 ;d:0004
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 1 H 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 0000 B3B3 FFFF
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0000 R:0xB3B3 M:0xFFFF ;d:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 L 1  ; // Bit 14
+                 > JTAG              1 1 0 0 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 L 1  ; // Bit 11
+                 > JTAG              1 1 0 0 L 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 0 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 0 L 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 L 1  ; // Bit 3
+                 > JTAG              1 1 0 0 L 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+
+// end of test body 
+halt             > JTAG              1 0 0 1 X 1  ;
+ign              > JTAG              1 0 0 1 X 1  ; // dummy vector
+}

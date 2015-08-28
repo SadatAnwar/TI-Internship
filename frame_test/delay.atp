@@ -1,0 +1,19 @@
+//#include "delay.edt"
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+
+vector ( $tset, TEST, TCK, TMS, TDI, TDO, RST     )
+{
+
+//                                   T T T T T R
+//                                   E C M D D S
+//                                   S K S I O T
+//                                   T          
+//                                              
+
+// Delay W:0x000F4240
+repeat 2000000      > FIX1US            1 0 0 1 X 1  ; // FIX1US

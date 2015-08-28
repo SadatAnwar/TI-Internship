@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="debuggerApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bench Debugger TI</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <link rel="stylesheet" href="src/style/bootstrap.css">
+    <link rel="stylesheet" href="src/style/style.css">
+    <link href="src/style/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style/flatty.css">
+    <script type="text/javascript" src="src/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="src/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/src/js/humane.min.js"></script>
+    <script src="src/angular/angular.min.js"></script>
+    <script src="src/angular/angular-route.min.js"></script>
+    <script src="src/app/app.js"></script>
+    <script src="src/app/controller.js"></script>
+    <script src="src/js/common1.js"></script>
+    <script src="src/app/framController.js"></script>
+    <!-- Custom Javascript for the pages-->
+</head>
+
+<body>
+<div ng-controller="mainController" class="nav-side-menu">
+    <div class="brand"><a href='#/home' style="color:#EFF3F5">Bench Debugger TI</a></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div id='navMenu' class="menu-list">
+
+        <ul id="menu-content" class="menu-content collapse out">
+
+            <li data-toggle="collapse" data-target="#products" class="collapsed">
+                <a href="#"><i class="fa fa-cogs"></i>Test Screens<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse in" id="products">
+                <li id='framLink' onclick="parent.location='#/fram'"><a href="#/fram">FRAM test</a></li>
+                <li id='ADCLink'><a href="#/wip">ADC</a></li>
+                <li id='IDDLink'><a href="#/wip">IDD</a></li>
+                <li id='ODPLink'><a href="#/wip">ODP</a></li>
+            </ul>
+            <li id="wipLink">
+                <a href="#/wip"><i class="fa fa-user fa-lg"></i>Expert Mode</a>
+            </li>
+
+            <li id='setupLink' onclick="parent.location='#/setup'">
+                <a href="#/setup"><i class="fa fa-wrench"></i>Setup</a>
+            </li>
+            <li id="helpLink" onclick="parent.location='#/help'">
+                <a href="#/help"><i class="fa fa-question"></i>Help</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div ng-view ></div>
+</body>
+<script type="text/javascript">
+    var loc = window.location.href.split('/');
+    $(".navMenu li").removeClass("active");
+    loc = loc[loc.length-1];
+    var active = document.getElementById(loc+'Link');
+    if (active != null) {
+        active.classList.add('active');
+    }
+</script>
+</html>

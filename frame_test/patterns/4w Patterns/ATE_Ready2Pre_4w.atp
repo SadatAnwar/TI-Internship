@@ -1,0 +1,1082 @@
+//#include "ATE_Ready2Pre.edt"
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+
+vector ( $tset, TEST, TCK, TMS, TDI, TDO, RST     )
+{
+
+//                                   T T T T T R
+//                                   E C M D D S
+//                                   S K S I O T
+//                                   T          
+//                                              
+
+//; Header_Start==================================================================
+//;---------------------------------------------------------------------------;
+//;                                                                           ;
+//;  Project:  FR59xx BOOT CODE: boot code test pattern                       ;
+//;   Author:  a0406323 Eric Loeffler                                         ;
+//;  Created:  02/11/2013                                                     ;
+//;                                                                           ;
+//;  (C) Texas Instruments, Deutschland GmbH, 2013                            ;
+//;      MSP430  Design                                                       ;
+//;      All Rights Reserved.                                                 ;
+//;                                                                           ;
+//;      *** TI Confidential - NDA Restrictions ***                           ;
+//;                                                                           ;
+//;---------------------------------------------------------------------------;
+//; Extended Description:
+//;
+//; 1. Requests PreProbe transistion
+//; 2. Restarts and process request
+//; 3. Check for Preprobe state
+//;
+//;---------------------------------------------------------------------------;
+//; Set Reset Signature and request preprobe
+//;---------------------------------------------------------------------------;
+//; Header_End====================================================================
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 255       > FIX1US            1 0 0 1 X 1  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            0 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG              1 0 0 1 X 1  ; // TDIset1 
+                 > JTAG              1 0 1 1 X 1  ; // TMSset1 
+//;    // Clock TCK six (6) times
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG              1 0 0 1 X 1  ; // TMSset0 
+                 > JTAG              1 1 0 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+//#include "i_SyncJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        SyncJtag
+//;// Description:
+//;// This macro initiates synchronization of the CPU to JTAG for a running device.
+//;// The CPU will be flushed after synch has been done to empty the pipeline!
+//;// The former FlushCpu macro must not be used any longer!!
+//;// If you want to sync to a non-running device use the SyncJtagwoFlush macro!!
+//;//*****************************************************************************
+
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//; Set RelLBYTE=01, TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x1501 R:0x0000 M:0x0000 ;w:1501
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 1 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 1 X 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+// wait_for_synch
+repeat 30        > FIX1US            1 0 0 1 X 1  ; // FIX1US
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_CAPTURE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0000 R:0x0200 M:0x0200 ;W:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 0 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 H 1  ; // TCE0 9
+                 > JTAG              1 1 0 0 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 0 X 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+//; Check again for sync by capturing CNTRL_SIG
+//; This is also what is called later the Check for Init State
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_CAPTURE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//; Compare TCE
+//SETREG_16BITS W:0x0000 R:0x3301 M:0x0200 ;w:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 0 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 H 1  ; // TCE0 9
+                 > JTAG              1 1 0 0 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 0 X 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+//; provide a minimum of 18 (20 are provided) clock cycles
+//; = former flush CPU macro
+//
+repeat 20        > TCLK              1 0 0 0 X 1  ; // TCLK
+
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 1 X 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_WriteMemWord.edt" FC00 0FF0
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        WriteMemWord
+//;// Description:
+//;// This macro writes one word to a dedicated memory address.
+//;// Parameter:
+//;//  $1 : Address to be written to (20bit)
+//;//  $2 : Data to be written (16bit)
+//;//*****************************************************************************
+
+//; EDT syntax
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_CAPTURE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//; Compare TCE, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0000 R:0x0301 M:0x3fd3 ;w:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 L 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 L 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 L 1  ; // POR 11
+                 > JTAG              1 1 0 0 L 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 H 1  ; // TCE0 9
+                 > JTAG              1 1 0 0 H 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 L 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 L 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 L 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 L 1  ; // HALT 1
+                 > JTAG              1 1 1 0 H 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//;    // Write Memory
+                 > TCLK_STATIC       1 0 0 0 X 1  ; // TCLKset0
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//; Set TCE=10, CPUSUSP, RW=write
+//SETREG_16BITS W:0x0500 R:0x0000 M:0x0000 ;w:0500
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 0 X 1  ; // RW 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+// ADDR_16BIT B:0x83
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // ADDR_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 1 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//SETREG_20BITS D:0xFC00 R:0x0000 M:0x0000 ;d:FC00
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_20BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 19
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 18
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 17
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 16
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 15
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 14
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 13
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 12
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 11
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // ADR Bit 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+
+                 > TCLK_STATIC       1 0 0 1 X 1  ; // TCLKset1
+//;    // New style: Only apply data during clock high phase
+
+// DATA_TO_ADDR B:0x85
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // DATA_TO_ADDR
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 1 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0FF0 R:0x0000 M:0x0000 ;w:0FF0
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 1 X 1  ; // Bit 11
+                 > JTAG              1 1 0 1 X 1  ; // Bit 10
+                 > JTAG              1 1 0 1 X 1  ; // Bit 9
+                 > JTAG              1 1 0 1 X 1  ; // Bit 8
+                 > JTAG              1 1 0 1 X 1  ; // Bit 7
+                 > JTAG              1 1 0 1 X 1  ; // Bit 6
+                 > JTAG              1 1 0 1 X 1  ; // Bit 5
+                 > JTAG              1 1 0 1 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+                 > TCLK_STATIC       1 0 0 0 X 1  ; // TCLKset0
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 1 X 1  ; // RW 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+                 > TCLK_STATIC       1 0 0 1 X 1  ; // TCLKset1
+
+//;// one or more cycle, so CPU is driving correct MAB
+//
+                 > TCLK              1 0 0 0 X 1  ; // TCLK
+//#include "i_WriteMemWord.edt" FC02 F00F
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        WriteMemWord
+//;// Description:
+//;// This macro writes one word to a dedicated memory address.
+//;// Parameter:
+//;//  $1 : Address to be written to (20bit)
+//;//  $2 : Data to be written (16bit)
+//;//*****************************************************************************
+
+//; EDT syntax
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // CNTRL_SIG_CAPTURE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//; Compare TCE, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0000 R:0x0301 M:0x3fd3 ;w:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 L 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 L 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 L 1  ; // POR 11
+                 > JTAG              1 1 0 0 L 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 H 1  ; // TCE0 9
+                 > JTAG              1 1 0 0 H 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 L 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 L 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 L 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 L 1  ; // HALT 1
+                 > JTAG              1 1 1 0 H 1  ; // RW 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//;    // Write Memory
+                 > TCLK_STATIC       1 0 0 0 X 1  ; // TCLKset0
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//; Set TCE=10, CPUSUSP, RW=write
+//SETREG_16BITS W:0x0500 R:0x0000 M:0x0000 ;w:0500
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 0 X 1  ; // RW 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+// ADDR_16BIT B:0x83
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // ADDR_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 1 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//SETREG_20BITS D:0xFC02 R:0x0000 M:0x0000 ;d:FC02
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_20BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 19
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 18
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 17
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 16
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 15
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 14
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 13
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 12
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 11
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // ADR Bit 2
+                 > JTAG              1 1 0 1 X 1  ; // ADR Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // ADR Bit 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+
+                 > TCLK_STATIC       1 0 0 1 X 1  ; // TCLKset1
+//;    // New style: Only apply data during clock high phase
+
+// DATA_TO_ADDR B:0x85
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // DATA_TO_ADDR
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 1 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xF00F R:0x0000 M:0x0000 ;w:F00F
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // Bit 15
+                 > JTAG              1 1 0 1 X 1  ; // Bit 14
+                 > JTAG              1 1 0 1 X 1  ; // Bit 13
+                 > JTAG              1 1 0 1 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 1 X 1  ; // Bit 3
+                 > JTAG              1 1 0 1 X 1  ; // Bit 2
+                 > JTAG              1 1 0 1 X 1  ; // Bit 1
+                 > JTAG              1 1 1 1 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+                 > TCLK_STATIC       1 0 0 0 X 1  ; // TCLKset0
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG              1 1 1 0 X 1  ; // CNTRL_SIG_16BIT
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // run/test idle
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG              1 1 1 0 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO1 15
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_SEQ_NO0 14
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE1 13
+                 > JTAG              1 1 0 0 X 1  ; // RELEASE_LBYTE0 12
+                 > JTAG              1 1 0 0 X 1  ; // POR 11
+                 > JTAG              1 1 0 1 X 1  ; // TCE1 10
+                 > JTAG              1 1 0 0 X 1  ; // TCE0 9
+                 > JTAG              1 1 0 1 X 1  ; // CPUSUSP 8
+                 > JTAG              1 1 0 0 X 1  ; // INSTR_LOAD 7
+                 > JTAG              1 1 0 0 X 1  ; // SECVAHD 6
+                 > JTAG              1 1 0 0 X 1  ; // CPUOFF 5
+                 > JTAG              1 1 0 0 X 1  ; // BYTE 4
+                 > JTAG              1 1 0 0 X 1  ; // WAIT 3
+                 > JTAG              1 1 0 0 X 1  ; // INTREQ 2
+                 > JTAG              1 1 0 0 X 1  ; // HALT 1
+                 > JTAG              1 1 1 1 X 1  ; // RW 0
+                 > JTAG              1 1 1 0 X 1  ; // update
+                 > JTAG              1 1 0 0 X 1  ; // back to idle
+                 > TCLK_STATIC       1 0 0 1 X 1  ; // TCLKset1
+
+//;// one or more cycle, so CPU is driving correct MAB
+//
+                 > TCLK              1 0 0 0 X 1  ; // TCLK
+
+//; ask for password check (write 0xA55A0373 to JMBIN) with next Boot Code execution
+//;#include "i_Set_JmbInCtl.edt"  0011                ; 32 bit input request
+//#include "i_JmbExchange.edt" 0011 0003 0003
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0011 R:0x0003 M:0x0003 ;d:0011
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 1 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 0 X 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" A55A ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xA55A R:0xffff M:0xffff ;d:A55A
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 1 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 1 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 H 1  ; // Bit 5
+                 > JTAG              1 1 0 1 H 1  ; // Bit 4
+                 > JTAG              1 1 0 1 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 1 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" A1A1 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0xA1A1 R:0xffff M:0xffff ;d:A1A1
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 1 H 1  ; // Bit 13
+                 > JTAG              1 1 0 0 H 1  ; // Bit 12
+                 > JTAG              1 1 0 0 H 1  ; // Bit 11
+                 > JTAG              1 1 0 0 H 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 1 H 1  ; // Bit 8
+                 > JTAG              1 1 0 1 H 1  ; // Bit 7
+                 > JTAG              1 1 0 0 H 1  ; // Bit 6
+                 > JTAG              1 1 0 1 H 1  ; // Bit 5
+                 > JTAG              1 1 0 0 H 1  ; // Bit 4
+                 > JTAG              1 1 0 0 H 1  ; // Bit 3
+                 > JTAG              1 1 0 0 H 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 1 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+//#include "i_StopJtag.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        StopJtag
+
+//;// Description:
+
+//;// Reset TAP controller and release TEST signal
+
+//;//*****************************************************************************
+
+
+
+//; put RSTNMI and TEST pin to normal operation condition
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+//; JTAG stopped
+
+
+
+
+//; ---------------------------------------------------------------------
+//; Restart device
+//; ---------------------------------------------------------------------
+
+//#include "i_Rstnmi.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        Rstnmi
+
+//;// Description:
+
+//;// Assert RSTNMI pin to issue power up reset
+
+//;//*****************************************************************************
+
+
+
+//; #v:     jtag.rst_nmi = 1'b0;
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US            0 0 0 1 X 0  ; // FIX1US
+
+//; #v:     jtag.rst_nmi = 1'b1;
+
+
+// Delay W:0x2DC6C0
+repeat 3000      > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+// Delay W:0x40FFFF
+repeat 4259      > FIX1US            0 0 0 1 X 1  ; // FIX1US
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 255       > FIX1US            1 0 0 1 X 1  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            0 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG              1 0 0 1 X 1  ; // TDIset1 
+                 > JTAG              1 0 1 1 X 1  ; // TMSset1 
+//;    // Clock TCK six (6) times
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG              1 0 0 1 X 1  ; // TMSset0 
+                 > JTAG              1 1 0 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+
+//; ---------------------------------------------------------------------
+//; check for PreProbe state
+//; ---------------------------------------------------------------------
+
+//; check for AT-PROBE state (read 0xA55A from JMBOUT0)
+//#include "i_JmbExchange.edt" 0004 0004 0004
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0004 R:0x0004 M:0x0004 ;d:0004
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 X 1  ; // Bit 15
+                 > JTAG              1 1 0 0 X 1  ; // Bit 14
+                 > JTAG              1 1 0 0 X 1  ; // Bit 13
+                 > JTAG              1 1 0 0 X 1  ; // Bit 12
+                 > JTAG              1 1 0 0 X 1  ; // Bit 11
+                 > JTAG              1 1 0 0 X 1  ; // Bit 10
+                 > JTAG              1 1 0 0 X 1  ; // Bit 9
+                 > JTAG              1 1 0 0 X 1  ; // Bit 8
+                 > JTAG              1 1 0 0 X 1  ; // Bit 7
+                 > JTAG              1 1 0 0 X 1  ; // Bit 6
+                 > JTAG              1 1 0 0 X 1  ; // Bit 5
+                 > JTAG              1 1 0 0 X 1  ; // Bit 4
+                 > JTAG              1 1 0 0 X 1  ; // Bit 3
+                 > JTAG              1 1 0 1 H 1  ; // Bit 2
+                 > JTAG              1 1 0 0 X 1  ; // Bit 1
+                 > JTAG              1 1 1 0 X 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+//#include "i_JmbExchange.edt" 0000 C3C3 FFFF
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG              1 1 1 1 X 1  ; // JMB_EXCHANGE
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 H 1  ; //-----LSB
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 L 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 0 1 L 1  ; 
+                 > JTAG              1 1 1 0 H 1  ; //-----MSB
+                 > JTAG              1 1 1 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; // run/test idle
+//SETREG_16BITS W:0x0000 R:0xC3C3 M:0xFFFF ;d:0000
+                 > JTAG              1 1 1 1 X 1  ; // SETREG_16BITS
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 1 X 1  ; 
+                 > JTAG              1 1 0 0 H 1  ; // Bit 15
+                 > JTAG              1 1 0 0 H 1  ; // Bit 14
+                 > JTAG              1 1 0 0 L 1  ; // Bit 13
+                 > JTAG              1 1 0 0 L 1  ; // Bit 12
+                 > JTAG              1 1 0 0 L 1  ; // Bit 11
+                 > JTAG              1 1 0 0 L 1  ; // Bit 10
+                 > JTAG              1 1 0 0 H 1  ; // Bit 9
+                 > JTAG              1 1 0 0 H 1  ; // Bit 8
+                 > JTAG              1 1 0 0 H 1  ; // Bit 7
+                 > JTAG              1 1 0 0 H 1  ; // Bit 6
+                 > JTAG              1 1 0 0 L 1  ; // Bit 5
+                 > JTAG              1 1 0 0 L 1  ; // Bit 4
+                 > JTAG              1 1 0 0 L 1  ; // Bit 3
+                 > JTAG              1 1 0 0 L 1  ; // Bit 2
+                 > JTAG              1 1 0 0 H 1  ; // Bit 1
+                 > JTAG              1 1 1 0 H 1  ; // Bit 0
+                 > JTAG              1 1 1 1 X 1  ; // update
+                 > JTAG              1 1 0 1 X 1  ; // back to idle
+
+
+// end of test body 
+halt             > JTAG              1 0 0 1 X 1  ;
+ign              > JTAG              1 0 0 1 X 1  ; // dummy vector
+}

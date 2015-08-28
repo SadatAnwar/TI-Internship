@@ -1,0 +1,774 @@
+INFO:src.python.server:Root folder for application : "C:\Repo\TestBench Project"
+INFO:src.python.server:Webserver will be hosted in: "C:\Repo\TestBench Project\benchDebuggerServer" folder
+INFO:root:All functions registered successfully, starting server.....
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.mem_dump_er:(Thread-8): [92mSuccessfully completed, file C:\Repo\TestBench-Project\frame_test\patterns\temp\temp.atp created[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iWriteMemWord0XD0000XCDAB.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iWriteMemWord0XD0020X12EF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iWriteMemWord0XD0040X5534.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iWriteMemWord0XD0060X5555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iWriteMemWord0XD0080X1111.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0010_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 10[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.mem_dump_er:(Thread-8): [92mSuccessfully completed, file C:\Repo\TestBench-Project\frame_test\patterns\temp\temp.atp created[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iWriteMemWord0XD0000XCDAB.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iWriteMemWord0XD0020X12EF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iWriteMemWord0XD0040X5534.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iWriteMemWord0XD0060X5555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 9[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.mem_dump_er:(Thread-8): [92mSuccessfully completed, file C:\Repo\TestBench-Project\frame_test\patterns\temp\temp.atp created[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iWriteMemWord0XD0000XCDAB.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iWriteMemWord0XD0020X12EF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iWriteMemWord0XD0040X5534.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iWriteMemWord0XD0060X5555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 9[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.mem_dump_er:(Thread-8): [92mSuccessfully completed, file C:\Repo\TestBench-Project\frame_test\patterns\temp\temp.atp created[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iWriteMemWord0XD0000XCDAB.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iWriteMemWord0XD0020X12EF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iWriteMemWord0XD0040X5534.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iWriteMemWord0XD0060X5555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 9[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 5[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 5[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[WARNING] src.python.mem_dump_er:(Thread-8): [93mFile %s already exsists, will be overwritten[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iReadMemWord0XD000.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iReadMemWord0XD002.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iReadMemWord0XD004.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iReadMemWord0XD006.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iReadMemWord0XD000.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iReadMemWord0XD002.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iReadMemWord0XD004.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iReadMemWord0XD006.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 9[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 0 D's and 20 A's[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0001_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0002_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0003_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0004_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0005_iReadMemWord0XD000.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0006_iReadMemWord0XD002.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0007_iReadMemWord0XD004.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0008_iReadMemWord0XD006.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\frame_test\files\temp\assembler\0009_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 9[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] __main__:(Thread-8): [92mRestarting server[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[ERROR] src.python.server:(Thread-8): [31m[Errno 10053] An established connection was aborted by the software in your host machine[0m
+[WARNING] src.python.server:(Thread-8): [93m[Errno 10053] An established connection was aborted by the software in your host machine[0m
+[ERROR] src.python.server:(Thread-8): [31m[Errno 10053] An established connection was aborted by the software in your host machine[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[ERROR] src.python.server:(Thread-8): [31m'cStringIO.StringO' object has no attribute 'name'[0m
+[ERROR] src.python.server:(Thread-8): [31m'cStringIO.StringO' object has no attribute 'name'[0m
+[ERROR] src.python.server:(Thread-8): [31m'cStringIO.StringO' object has no attribute 'name'[0m
+[ERROR] src.python.server:(Thread-8): [31m'cStringIO.StringO' object has no attribute 'name'[0m
+[ERROR] src.python.server:(Thread-8): [31m'cStringIO.StringO' object has no attribute 'name'[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] __main__:(MainThread): [92mCreating folder C:\Repo\TestBench-Project\temp\Test_Example[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] __main__:(MainThread): [92mCreating folder C:\Repo\TestBench-Project\temp\Test_Example1[0m
+[ERROR] jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[ERROR] src.python.server:(Thread-8): [31m[Errno 10053] An established connection was aborted by the software in your host machine[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[ERROR] src.python.websocket_server:(Thread-8): [31merror writing - success:::sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCreating folder C:\Repo\TestBench-Project\temp\oo[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled oo[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCreating folder C:\Repo\TestBench-Project\temp\W2B_1V65[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled W2B_1V65[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled oo[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled W2B_1V65[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled oo[0m
+[ERROR] src.python.websocket_server:(Thread-8): [31merror writing - success:::oo[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled W2B_1V65[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled oo[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled sadat_frame[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled W2B_1V65[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :invalid literal for int() with base 16: ''[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 27, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 85, in compile
+    'MemStart': int(self.params['PARAM1'], 16),
+ValueError: invalid literal for int() with base 16: ''
+[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :Template File doesnot exist[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 27, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 88, in compile
+    self.testInstanceSeq = sorted(self._makeFrameTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 165, in _makeFrameTestSeq
+    testInstances.add(MemoryReadTestInstance(part, memoryFile, template, memStart, memSize))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 254, in __init__
+    self.memoryDumpHandler = MemReadEr(memFile, template, startAdd, memSize)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 132, in __init__
+    super(MemReadEr, self).__init__(memoryFile, templateATP)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 55, in __init__
+    self.templateWriter = AtpFromTemplateWriter(self.TEMPLATE_ATP)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 30, in __init__
+    raise IOError('Template File doesnot exist')
+IOError: Template File doesnot exist
+[0m
+[INFO] __main__:(Thread-8): [92mWill be logged to file C:\Repo\TestBench-Project\logs\TestExecutionLog-26-08.124911.log[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :invalid literal for int() with base 16: ''[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 28, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 87, in compile
+    'MemStart': int(self.params['PARAM1'], 16),
+ValueError: invalid literal for int() with base 16: ''
+[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :Template File doesnot exist[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 28, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 90, in compile
+    self.testInstanceSeq = sorted(self._makeFrameTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 167, in _makeFrameTestSeq
+    testInstances.add(MemoryReadTestInstance(part, memoryFile, template, memStart, memSize))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 256, in __init__
+    self.memoryDumpHandler = MemReadEr(memFile, template, startAdd, memSize)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 132, in __init__
+    super(MemReadEr, self).__init__(memoryFile, templateATP)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 55, in __init__
+    self.templateWriter = AtpFromTemplateWriter(self.TEMPLATE_ATP)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 30, in __init__
+    raise IOError('Template File doesnot exist')
+IOError: Template File doesnot exist
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :Template File doesnot exist[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 28, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 90, in compile
+    self.testInstanceSeq = sorted(self._makeFrameTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 167, in _makeFrameTestSeq
+    testInstances.add(MemoryReadTestInstance(part, memoryFile, template, memStart, memSize))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 256, in __init__
+    self.memoryDumpHandler = MemReadEr(memFile, template, startAdd, memSize)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 132, in __init__
+    super(MemReadEr, self).__init__(memoryFile, templateATP)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 55, in __init__
+    self.templateWriter = AtpFromTemplateWriter(self.TEMPLATE_ATP)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 30, in __init__
+    raise IOError('Template File doesnot exist')
+IOError: Template File doesnot exist
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :Template File doesnot exist[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 28, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 94, in compile
+    self.testInstanceSeq = sorted(self._makeFrameTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 171, in _makeFrameTestSeq
+    testInstances.add(MemoryReadTestInstance(part, memoryFile, template, memStart, memSize))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 260, in __init__
+    self.memoryDumpHandler = MemReadEr(memFile, template, startAdd, memSize)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 132, in __init__
+    super(MemReadEr, self).__init__(memoryFile, templateATP)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 55, in __init__
+    self.templateWriter = AtpFromTemplateWriter(self.TEMPLATE_ATP)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 30, in __init__
+    raise IOError('Template File doesnot exist')
+IOError: Template File doesnot exist
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mFRAME_T[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :Template File doesnot exist[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 28, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 94, in compile
+    self.testInstanceSeq = sorted(self._makeFrameTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 171, in _makeFrameTestSeq
+    testInstances.add(MemoryReadTestInstance(part, memoryFile, template, memStart, memSize))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 260, in __init__
+    self.memoryDumpHandler = MemReadEr(memFile, template, startAdd, memSize)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 132, in __init__
+    super(MemReadEr, self).__init__(memoryFile, templateATP)
+  File "C:/Repo/TestBench-Project\src\python\mem_dump_er.py", line 55, in __init__
+    self.templateWriter = AtpFromTemplateWriter(self.TEMPLATE_ATP)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 30, in __init__
+    raise IOError('Template File doesnot exist')
+IOError: Template File doesnot exist
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCreating folder C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93m/root/benchDebugger/atpTestTemplate\FRAM_template.atp Template file doesnot exist, trying to find file at C:/root/benchDebugger/atpTestTemplate\FRAM_template.atp[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :[Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 81, in compile
+    atpWriter = atp_from_template_writer.AtpFromTemplateWriter(self.template)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 31, in __init__
+    self.__analyzeATP__()
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 37, in __analyzeATP__
+    with open(self.templateFile, 'rU') as template:
+IOError: [Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93m/root/benchDebugger/atpTestTemplate\FRAM_template.atp Template file doesnot exist, trying to find file at C:/root/benchDebugger/atpTestTemplate\FRAM_template.atp[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :[Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 81, in compile
+    atpWriter = atp_from_template_writer.AtpFromTemplateWriter(self.template)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 31, in __init__
+    self.__analyzeATP__()
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 37, in __analyzeATP__
+    with open(self.templateFile, 'rU') as template:
+IOError: [Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'
+[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93m/root/benchDebugger/atpTestTemplate\FRAM_template.atp Template file doesnot exist, trying to find file at C:/root/benchDebugger/atpTestTemplate\FRAM_template.atp[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :[Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 81, in compile
+    atpWriter = atp_from_template_writer.AtpFromTemplateWriter(self.template)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 31, in __init__
+    self.__analyzeATP__()
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 37, in __analyzeATP__
+    with open(self.templateFile, 'rU') as template:
+IOError: [Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93m/root/benchDebugger/atpTestTemplate\FRAM_template.atp Template file doesnot exist, trying to find file at C:/root/benchDebugger/atpTestTemplate\FRAM_template.atp[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :[Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 81, in compile
+    atpWriter = atp_from_template_writer.AtpFromTemplateWriter(self.template)
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 31, in __init__
+    self.__analyzeATP__()
+  File "C:/Repo/TestBench-Project\src\python\atp_from_template_writer.py", line 37, in __analyzeATP__
+    with open(self.templateFile, 'rU') as template:
+IOError: [Errno 2] No such file or directory: '/root/benchDebugger/atpTestTemplate\\FRAM_template.atp'
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :global name 'bbio' is not defined[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 83, in compile
+    self.testInstanceSeq = sorted(self._makeFRAMTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 122, in _makeFRAMTestSeq
+    DACInstance.append(DACTestInstance(part, x + 2, 0))
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 340, in __init__
+    self.dac = debugger_cape.DAC(int(channel))
+  File "C:/Repo/TestBench-Project\src\python\debugger_cape.py", line 36, in __init__
+    self.dac = bbio.SPI0
+NameError: global name 'bbio' is not defined
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :unhashable type: 'list'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 83, in compile
+    self.testInstanceSeq = sorted(self._makeFRAMTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 146, in _makeFRAMTestSeq
+    testInstances.add(DACInstance)
+TypeError: unhashable type: 'list'
+[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :unhashable type: 'list'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 83, in compile
+    self.testInstanceSeq = sorted(self._makeFRAMTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 146, in _makeFRAMTestSeq
+    testInstances.add(DACInstance)
+TypeError: unhashable type: 'list'
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :unhashable type: 'list'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 83, in compile
+    self.testInstanceSeq = sorted(self._makeFRAMTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 145, in _makeFRAMTestSeq
+    testInstances.add(DACInstance)
+TypeError: unhashable type: 'list'
+[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mError compiling test :unhashable type: 'list'[0m
+[ERROR] src.python.test_execution:(Thread-8): [31mTraceback (most recent call last):
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 29, in compileTest
+    testObject.compile()
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 83, in compile
+    self.testInstanceSeq = sorted(self._makeFRAMTestSeq())
+  File "C:/Repo/TestBench-Project\src\python\test_execution.py", line 145, in _makeFRAMTestSeq
+    testInstances.add(DACInstance)
+TypeError: unhashable type: 'list'
+[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 8[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 3[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled WR_MARCH6N_2_1V35[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 8[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 3[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled WR_MARCH6N_2_1V35[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 8[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 3[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled WR_MARCH6N_2_1V35[0m
+[INFO] __main__:(Thread-8): [92mWill be logged to file C:\Repo\TestBench-Project\logs\TestExecutionLog-27-08.123004.log[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 8[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 3[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled WR_MARCH6N_2_1V35[0m
+[INFO] __main__:(Thread-8): [92mWill be logged to file C:\Repo\TestBench-Project\logs\TestExecutionLog-27-08.123154.log[0m
+[INFO] src.python.test_execution:(Thread-8): [92mExecuting instance:0 [Digital] of WR_MARCH6N_2_1V35[0m
+[INFO] src.python.server:(MainThread): [92mRoot folder for application : "C:\Repo\TestBench-Project"[0m
+[INFO] src.python.server:(MainThread): [92mWebserver will be hosted in: "C:\Repo\TestBench-Project\benchDebuggerServer" folder[0m
+[ERROR] src.python.jtag_driver:(MainThread): [31m!!!!!FATAL ERROR!!!!!: Unable to power down JTAG: [Errno 2] No such file or directory: '/dev/mem'[0m
+[INFO] src.python.atp_from_template_writer:(MainThread): [92mTemplate has 16 D's and 20 A's[0m
+[INFO] src.python.atp_from_template_writer:(Thread-8): [92mTemplate has 64 D's and 0 A's[0m
+[WARNING] src.python.atp_from_template_writer:(Thread-8): [93mFile C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\atp\WR_MARCH6N_2_1V35.atp already exsists, will be overwritten[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mUnable to detect template type, defaulting to 4W[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 0[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0000_iStartJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0001_iSyncJtag.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0002_iAssertPuc.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0003_iWriteMemWord015C5A80.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0004_iWriteMemWord44005555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0005_iWriteMemWord44025555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0006_iWriteMemWord44045555.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__04.atp\0007_iWriteMemWord44065555.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 8[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m4W JTAG File, will be parsed using 4W directives[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p already exists, will now be deleted.[0m
+[WARNING] src.python.atp_to_assembler:(Thread-8): [93mC:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p already exists, will now be deleted.[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0000_iReadMemWord44005555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0001_iReadMemWord44025555FFFF.p' returned non-zero exit status 1[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\temp\WR_MARCH6N_2_1V35\assembler\WR_MARCH6N_2_1V35__05.atp\0002_iSetPc00800000.p' returned non-zero exit status 1[0m
+[INFO] src.python.atp_to_assembler:(Thread-8): [92m0 binary files compiled successfully, failed files 3[0m
+[ERROR] src.python.atp_to_assembler:(Thread-8): [31mCommand 'pasm -b C:\Repo\TestBench-Project\src\headers_4W\endJTAG.p' returned non-zero exit status 1[0m
+[INFO] src.python.test_execution:(Thread-8): [92mCompiled WR_MARCH6N_2_1V35[0m
+[INFO] __main__:(Thread-8): [92mWill be logged to file C:\Repo\TestBench-Project\logs\TestExecutionLog-27-08.123539.log[0m
+[INFO] src.python.test_execution:(Thread-8): [92mExecuting instance:0 [Digital] of WR_MARCH6N_2_1V35[0m

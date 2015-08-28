@@ -1,0 +1,69 @@
+<div class="nav-side-menu" >
+    <div class="brand"><a href='/' style="color:#EFF3F5">Bench Debugger TI</a></div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+
+        <ul id="menu-content" class="menu-content collapse out">
+
+            <li data-toggle="collapse" data-target="#products" class="collapsed">
+                <a href="#"><i class="fa fa-cogs"></i>Test Screens<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse in" id="products">
+                <li id="framLink" onclick="parent.location='/pages/fram.html'"><a href="/pages/fram.html">FRAM test</a></li>
+                <li id="ADCLink"><a href="/pages/views/wip.html">ADC</a></li>
+                <li id="IDDLink"><a href="/pages/views/wip.html">IDD</a></li>
+                <li id="ODPLink"><a href="/pages/views/wip.html">ODP</a></li>
+            </ul>
+            <li id='expertLink'>
+                <a href="/pages/views/wip.html"><i class="fa fa-user fa-lg"></i>Expert Mode</a>
+            </li>
+
+            <li id='setupLink' onclick="parent.location='/pages/setup.html'">
+                <a href="/pages/setup.html"><i class="fa fa-wrench"></i>Setup</a>
+            </li>
+            <li id='logsLink' onclick="parent.location='/pages/logs.html'">
+                    <a href="/pages/logs.html"><i class="fa fa-book"></i>Logs</a>
+            </li>
+            <li id='memoryFiles' onclick="parent.location='/pages/memoryFiles.html'">
+                <a href="/pages/memoryFiles.html"><i class="fa fa-floppy-o"></i>Memory Files</a>
+            </li>
+            <li id='helpLink' onclick="parent.location='/pages/help.html'">
+                <a href="/pages/help.html"><i class="fa fa-question"></i>Help</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var navHighlight = {
+        loc: window.location.href,
+        highlight: function () {
+            try{
+                if (this.loc.indexOf('fram') > -1){
+                    var element = document.getElementById('framLink');
+                    element.classList.add('active');
+                }
+                else if (this.loc.indexOf('setup') > -1){
+                    var element = document.getElementById('setupLink');
+                    element.classList.add('active');
+                }
+                else if (this.loc.indexOf('help') > -1){
+                    var element = document.getElementById('helpLink');
+                    element.classList.add('active');
+                }
+                else if (this.loc.indexOf('logs') > -1){
+                    var element = document.getElementById('logsLink');
+                    element.classList.add('active');
+                }
+                else if (this.loc.indexOf('memoryFiles') > -1){
+                    var element = document.getElementById('memoryFiles');
+                    element.classList.add('active');
+                }
+            }
+            catch (e){
+                console.log(e);
+            }
+        }
+    };
+    navHighlight.highlight();
+</script>

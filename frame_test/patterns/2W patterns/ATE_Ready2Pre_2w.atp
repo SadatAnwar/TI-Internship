@@ -1,0 +1,2507 @@
+//; J750 Pattern File generated with Scr2SCR Compiler
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+
+vector ( $tset, TEST,  RST     )
+{
+
+//                                    T R
+//                                    E S
+//                                    S T
+//                                    T  
+//
+//#include "ATE_Ready2Pre.edt"
+//; Header_Start==================================================================
+//;---------------------------------------------------------------------------;
+//;                                                                           ;
+//;  Project:  FR59xx BOOT CODE: boot code test pattern                       ;
+//;   Author:  a0406323 Eric Loeffler                                         ;
+//;  Created:  02/11/2013                                                     ;
+//;                                                                           ;
+//;  (C) Texas Instruments, Deutschland GmbH, 2013                            ;
+//;      MSP430  Design                                                       ;
+//;      All Rights Reserved.                                                 ;
+//;                                                                           ;
+//;      *** TI Confidential - NDA Restrictions ***                           ;
+//;                                                                           ;
+//;---------------------------------------------------------------------------;
+//; Extended Description:
+//;
+//; 1. Requests PreProbe transistion
+//; 2. Restarts and process request
+//; 3. Check for Preprobe state
+//;
+//;---------------------------------------------------------------------------;
+//; Set Reset Signature and request preprobe
+//;---------------------------------------------------------------------------;
+//; Header_End====================================================================
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 100       > FIX1US             0 1   ; //FIX1US
+                 > FIX1US             0 1   ; //FIX1US
+repeat 255       > FIX1US             1 1   ; //FIX1US
+                 > FIX1US             0 1   ; //FIX1US
+                 > FIX1US             1 1   ; //FIX1US
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TDIset1 
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TMSset1 
+                 > JTAG               0 X   ; //TDO
+//;    // Clock TCK six (6) times
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TMSset0 
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+//#include "i_SyncJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        SyncJtag
+//;// Description:
+//;// This macro initiates synchronization of the CPU to JTAG for a running device.
+//;// The CPU will be flushed after synch has been done to empty the pipeline!
+//;// The former FlushCpu macro must not be used any longer!!
+//;// If you want to sync to a non-running device use the SyncJtagwoFlush macro!!
+//;//*****************************************************************************
+
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set RelLBYTE=01, TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x1501 R:0x0000 M:0x0000 ;w:1501
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+// wait_for_synch
+repeat 30        > FIX1US             1 1   ; //FIX1US
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_CAPTURE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0x0000 R:0x0200 M:0x0200 ;W:0000
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+//; Check again for sync by capturing CNTRL_SIG
+//; This is also what is called later the Check for Init State
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_CAPTURE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Compare TCE
+//SETREG_16BITS W:0x0000 R:0x3301 M:0x0200 ;w:0000
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+//; provide a minimum of 18 (20 are provided) clock cycles
+//; = former flush CPU macro
+//
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLK
+repeat 20        > TCLK               1 0   ; //TDI// TCLK
+                 > JTAG               0 1   ; //TDI// TCLK
+                 > JTAG               0 X   ; //TDO
+
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//#include "i_WriteMemWord.edt" FC00 0FF0
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        WriteMemWord
+//;// Description:
+//;// This macro writes one word to a dedicated memory address.
+//;// Parameter:
+//;//  $1 : Address to be written to (20bit)
+//;//  $2 : Data to be written (16bit)
+//;//*****************************************************************************
+
+//; EDT syntax
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_CAPTURE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Compare TCE, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0000 R:0x0301 M:0x3fd3 ;w:0000
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE1 10
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUSUSP 8
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//;    // Write Memory
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset0
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset0
+                 > JTAG               0 0   ; //TDI// TCLKset0
+                 > JTAG               0 X   ; //TDO
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set TCE=10, CPUSUSP, RW=write
+//SETREG_16BITS W:0x0500 R:0x0000 M:0x0000 ;w:0500
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+// ADDR_16BIT B:0x83
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADDR_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_20BITS D:0xFC00 R:0x0000 M:0x0000 ;d:FC00
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_20BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 19
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 18
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 17
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 16
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset1
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset1
+                 > JTAG               0 1   ; //TDI// TCLKset1
+                 > JTAG               0 X   ; //TDO
+//;    // New style: Only apply data during clock high phase
+
+// DATA_TO_ADDR B:0x85
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// DATA_TO_ADDR
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0x0FF0 R:0x0000 M:0x0000 ;w:0FF0
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset0
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset0
+                 > JTAG               0 0   ; //TDI// TCLKset0
+                 > JTAG               0 X   ; //TDO
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset1
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset1
+                 > JTAG               0 1   ; //TDI// TCLKset1
+                 > JTAG               0 X   ; //TDO
+
+//;// one or more cycle, so CPU is driving correct MAB
+//
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLK
+                 > TCLK               1 0   ; //TDI// TCLK
+                 > JTAG               0 1   ; //TDI// TCLK
+                 > JTAG               0 X   ; //TDO
+//#include "i_WriteMemWord.edt" FC02 F00F
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        WriteMemWord
+//;// Description:
+//;// This macro writes one word to a dedicated memory address.
+//;// Parameter:
+//;//  $1 : Address to be written to (20bit)
+//;//  $2 : Data to be written (16bit)
+//;//*****************************************************************************
+
+//; EDT syntax
+// CNTRL_SIG_CAPTURE B:0x14
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// CNTRL_SIG_CAPTURE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Compare TCE, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0000 R:0x0301 M:0x3fd3 ;w:0000
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE1 10
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUSUSP 8
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//;    // Write Memory
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset0
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset0
+                 > JTAG               0 0   ; //TDI// TCLKset0
+                 > JTAG               0 X   ; //TDO
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set TCE=10, CPUSUSP, RW=write
+//SETREG_16BITS W:0x0500 R:0x0000 M:0x0000 ;w:0500
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+// ADDR_16BIT B:0x83
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADDR_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_20BITS D:0xFC02 R:0x0000 M:0x0000 ;d:FC02
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_20BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 19
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 18
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 17
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 16
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// ADR Bit 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// ADR Bit 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset1
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset1
+                 > JTAG               0 1   ; //TDI// TCLKset1
+                 > JTAG               0 X   ; //TDO
+//;    // New style: Only apply data during clock high phase
+
+// DATA_TO_ADDR B:0x85
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// DATA_TO_ADDR
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0xF00F R:0x0000 M:0x0000 ;w:F00F
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset0
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset0
+                 > JTAG               0 0   ; //TDI// TCLKset0
+                 > JTAG               0 X   ; //TDO
+// CNTRL_SIG_16BIT B:0x13
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// CNTRL_SIG_16BIT
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//; Set TCE=10, CPUSUSP, RW=read
+//SETREG_16BITS W:0x0501 R:0x0000 M:0x0000 ;w:0501
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO1 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_SEQ_NO0 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE1 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// RELEASE_LBYTE0 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// POR 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCE1 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// TCE0 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// CPUSUSP 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INSTR_LOAD 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// SECVAHD 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// CPUOFF 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// BYTE 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// WAIT 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// INTREQ 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// HALT 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// RW 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 0   ; //TDI// TCLKset1
+                 > TCLK_STATIC        1 1   ; //TDI// TCLKset1
+                 > JTAG               0 1   ; //TDI// TCLKset1
+                 > JTAG               0 X   ; //TDO
+
+//;// one or more cycle, so CPU is driving correct MAB
+//
+                 > JTAG               0 0   ; //TMS
+                 > TCLK_STATIC        1 1   ; //TDI// TCLK
+                 > TCLK               1 0   ; //TDI// TCLK
+                 > JTAG               0 1   ; //TDI// TCLK
+                 > JTAG               0 X   ; //TDO
+
+//; ask for password check (write 0xA55A0373 to JMBIN) with next Boot Code execution
+//;#include "i_Set_JmbInCtl.edt"  0011                ; 32 bit input request
+//#include "i_JmbExchange.edt" 0011 0003 0003
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// JMB_EXCHANGE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0x0011 R:0x0003 M:0x0003 ;d:0011
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 2
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 1
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//#include "i_JmbExchange.edt" A55A ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// JMB_EXCHANGE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0xA55A R:0xffff M:0xffff ;d:A55A
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 15
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 13
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 10
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 8
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 7
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 6
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 5
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 4
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 3
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 2
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 1
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//#include "i_JmbExchange.edt" A1A1 ffff ffff
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// JMB_EXCHANGE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0xA1A1 R:0xffff M:0xffff ;d:A1A1
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 15
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 13
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 10
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 8
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 7
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 6
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 5
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 4
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 3
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 2
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 1
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+//#include "i_StopJtag.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        StopJtag
+
+//;// Description:
+
+//;// Reset TAP controller and release TEST signal
+
+//;//*****************************************************************************
+
+
+
+//; put RSTNMI and TEST pin to normal operation condition
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US             0 1   ; //FIX1US
+
+//; JTAG stopped
+
+
+
+
+//; ---------------------------------------------------------------------
+//; Restart device
+//; ---------------------------------------------------------------------
+
+//#include "i_Rstnmi.edt"
+//;//*****************************************************************************
+
+//;// EDT Macro for JTAG/EEM verification
+
+//;// Name:        Rstnmi
+
+//;// Description:
+
+//;// Assert RSTNMI pin to issue power up reset
+
+//;//*****************************************************************************
+
+
+
+//; #v:     jtag.rst_nmi = 1'b0;
+
+
+
+//; Wait 100us
+
+// Delay W:0x186A0
+repeat 100       > FIX1US             0 0   ; //FIX1US
+
+//; #v:     jtag.rst_nmi = 1'b1;
+
+
+// Delay W:0x2DC6C0
+repeat 3000      > FIX1US             0 1   ; //FIX1US
+
+// Delay W:0x40FFFF
+repeat 4259      > FIX1US             0 1   ; //FIX1US
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 100       > FIX1US             0 1   ; //FIX1US
+                 > FIX1US             0 1   ; //FIX1US
+repeat 255       > FIX1US             1 1   ; //FIX1US
+                 > FIX1US             0 1   ; //FIX1US
+                 > FIX1US             1 1   ; //FIX1US
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TDIset1 
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TMSset1 
+                 > JTAG               0 X   ; //TDO
+//;    // Clock TCK six (6) times
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TMSset0 
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// TCK
+                 > JTAG               0 X   ; //TDO
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240
+
+
+
+//; ---------------------------------------------------------------------
+//; check for PreProbe state
+//; ---------------------------------------------------------------------
+
+//; check for AT-PROBE state (read 0xA55A from JMBOUT0)
+//#include "i_JmbExchange.edt" 0004 0004 0004
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// JMB_EXCHANGE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0x0004 R:0x0004 M:0x0004 ;d:0004
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 15
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 13
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 10
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 8
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 7
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 6
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 5
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 4
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 3
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// Bit 2
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 1
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 0
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+//#include "i_JmbExchange.edt" 0000 C3C3 FFFF
+//;//*****************************************************************************
+//;// EDT Macro for JTAG verification
+//;// Name:        JmbExchange
+//;// Description:
+//;// This macro writes/reads the JTAG Mailbox registers (depending on state of JMB FSM)
+//;//
+//;// Parameter:
+//;//  $1 : Value to write into the JMB register
+//;//  $2 : Expected value from the JMB register
+//;//  $3 : Mask value for JMB register read access
+//;//*****************************************************************************
+
+//; EDT syntax
+
+// JMB_EXCHANGE B:0x61
+//JTAGCmd_following
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// JMB_EXCHANGE
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI//-----LSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI//-----MSB
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// run/test idle
+                 > JTAG               0 X   ; //TDO
+//SETREG_16BITS W:0x0000 R:0xC3C3 M:0xFFFF ;d:0000
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// SETREG_16BITS
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 15
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 14
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 13
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 12
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 11
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 10
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 9
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 8
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 7
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 6
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 5
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 4
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 3
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 2
+                 > JTAG               0 L   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 1
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 0   ; //TDI// Bit 0
+                 > JTAG               0 H   ; //TDO
+                 > JTAG               0 1   ; //TMS
+                 > JTAG               0 1   ; //TDI// update
+                 > JTAG               0 X   ; //TDO
+                 > JTAG               0 0   ; //TMS
+                 > JTAG               0 1   ; //TDI// back to idle
+                 > JTAG               0 X   ; //TDO
+
+// end of test body 
+halt             > FIX1US             1 1   ;
+ign              > FIX1US             1 1   ; // dummy vector
+}

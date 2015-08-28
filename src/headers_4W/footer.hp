@@ -1,0 +1,4 @@
+
+MOV R31.b0, PRU1_ARM_INTERRUPT+16   // Send notification to Host that the instructions are done
+
+HALT

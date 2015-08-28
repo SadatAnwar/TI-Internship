@@ -1,0 +1,62 @@
+//#include "blink_led_4w.edt"
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+
+vector ( $tset, TEST, TCK, TMS, TDI, TDO, RST     )
+{
+
+//                                   T T T T T R
+//                                   E C M D D S
+//                                   S K S I O T
+//                                   T
+//
+
+//; Header_Start==================================================================
+//;
+//; Description:
+//; blink LED
+//;
+//; Revision:
+//; 1.0, Peter Blass, 13.05.2013, init version
+
+//; Header_End====================================================================
+
+//#include "i_StartJtag.edt"
+//;//*****************************************************************************
+//;// EDT Macro for JTAG/EEM verification
+//;// Name:        StartJtag
+//;// Description:
+//;// This macro has to be included at the very first beginning of any test.
+//;// i_macro_ATE
+//;//*****************************************************************************
+
+
+// Start_JTag
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 2         > FIX1US            0 0 0 1 X 1  ; // FIX1US
+repeat 255       > FIX1US            1 0 0 1 X 1  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            0 0 0 1 X 0  ; // FIX1US
+                 > FIX1US            1 0 0 1 X 0  ; // FIX1US
+
+//;    // Reset TAP Controller State Machine
+//;    // Set default state for JTAG signals (TDI = TMS = TCK = 1)
+                 > JTAG              1 0 0 1 X 1  ; // TDIset1
+                 > JTAG              1 0 1 1 X 1  ; // TMSset1
+//;    // Clock TCK six (6) times
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+                 > JTAG              1 1 1 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Test-Logic Reset" state
+//;    // Clock TCK one more time with TMS = 0
+                 > JTAG              1 0 0 1 X 1  ; // TMSset0
+                 > JTAG              1 1 0 1 X 1  ; // TCK
+//;    // TAP Controller State Machine is now in "Run-Test/Idle" state (changed W:0x927C0)
+//;Delay W:F4240

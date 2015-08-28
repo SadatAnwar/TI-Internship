@@ -1,0 +1,18 @@
+#include "C:\Repo\TestBench-Project\src\headers_4W\header.hp"
+FIX1US 	 0b00010100, 2 	
+FIX1US 	 0b00010100, 2 	
+FIX1US 	 0b00011100, 255 	
+FIX1US 	 0b00001100 	
+FIX1US 	 0b00000100 	
+FIX1US 	 0b00001100 	
+JTAG 	 0b00011100 	
+JTAG 	 0b00011110 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011111 	
+JTAG 	 0b00011100 	
+JTAG 	 0b00011101 	
+#include "C:\Repo\TestBench-Project\src\headers_4W\footer.hp"

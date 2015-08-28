@@ -1,0 +1,51 @@
+#ifndef _TCLK_TDI_SIGNAL_
+#define _TCLK_TDI_SIGNAL_
+
+#include "/root/benchDebugger/src/headers_2W/global.hp"
+
+
+
+// ***************************************
+// *    TCLK_TDI   Definitions       	 *
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+
+
+.macro TCLK
+.mparam TST, RST
+	LDI INPUT_SIGNAL_W0, ((TST<<1|1<<2)<<2|(TST<<1|RST<<2))
+    JAL R9.w0, TCLK_CALL
+.endm
+
+
+TCLK_CALL:
+ 	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//15 SET TST WITH RST HIGH
+ 	LSL INPUT_SIGNAL_W0, INPUT_SIGNAL_W0, 2				//20
+ 	LDI TIMER_LOOP, 3                                 	//25
+ 	CALL WAIT_NS										//25+40=65
+ 	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//75 ==> RST FROM INPUT
+ 	LDI TIMER_LOOP, 8                                 	//80
+ 	CALL WAIT_NS										//80+90=170
+ 	SET RST_OUT											//175 RST RETURN HIGH
+ 	LDI TIMER_LOOP, 5									//180
+ 	CALL WAIT_NS										//180+60=240
+ 	LDI TIMER_LOOP, 1									//245
+ 	JMP R9.w0											//250
+
+
+
+.macro TCLK_STATIC
+.mparam TST, RST
+	LDI INPUT_SIGNAL_W0, (TST<<1|RST<<2)<<2
+	JAL R9.w0, TCLK_STATIC_CALL
+.endm
+
+TCLK_STATIC_CALL:
+	AND R30.w0, INPUT_SIGNAL_W0, OUTPUT_MASK           	//15 SET TST WITH RST HIGH
+	LDI TIMER_LOOP, 21									//20
+	CALL WAIT_NS										//20+220= 240
+	LDI TIMER_LOOP, 1									//245
+	JMP R9.w0											//250 END
+
+
+#endif //_TCLK_TDI_SIGNAL_

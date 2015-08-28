@@ -1,0 +1,187 @@
+<div id="framTestSetupModalWindow" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#eeeeff">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="testSetupTitle" class="modal-title">Test Setup
+				</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-top:5%">
+                    <div class="col-xs-6  col-sm-offset-0">
+                        <span class="list-group-item active" style="text-align:center;">Digital</span>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Algorithm<a href='/pages/help.html?link=https://sps09.itg.ti.com/sites/FRAMTest/Test%20Documentation/Docs/html/group___i___algorithm.html' target="_blank"> (?)</a></td>
+                                    <td>
+                                        <select id="algorithmDropdown" class="form-control">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Memory<a href='/pages/help.html?link=https://sps09.itg.ti.com/sites/FRAMTest/Test%20Documentation/Docs/html/group___i___memory.html' target="_blank"> (?)</a></td>
+                                    <td>
+                                        <select id="memoryDropdown" class="form-control">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Data<a href='/pages/help.html?link=https://sps09.itg.ti.com/sites/FRAMTest/Test%20Documentation/Docs/html/group___i___data.html' target="_blank"> (?)</a></td>
+                                    <td>
+                                        <select id="dataDropdown" class="form-control">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Settings<a href='/pages/help.html?link=https://sps09.itg.ti.com/sites/FRAMTest/Test%20Documentation/Docs/html/group___i___setting.html' target="_blank"> (?)</a></td>
+                                    <td>
+                                        <select id="settingDropdown" class="form-control">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Result Type<a href='/pages/help.html?link=https://sps09.itg.ti.com/sites/FRAMTest/Test%20Documentation/Docs/html/group___i___result.html' target="_blank"> (?)</a></td>
+                                    <td>
+                                        <select id="resultTypDropdown" class="form-control">
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-xs-6 col-xs-offset-0">
+                        <span class="list-group-item active" style="text-align:center;">Analog</span>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li class="active">
+                                <a href="#analog0" role="tab" data-toggle="tab">Analog-0</a>
+                            </li>
+                            <li>
+                                <a href="#analog1" role="tab" data-toggle="tab">Analog-1</a>
+                            </li>
+                            <li>
+                                <a href="#analog2" role="tab" data-toggle="tab">Analog-2</a>
+                            </li>
+
+                        </ul>
+                        <!-- Nav tabs Ends-->
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="analog0">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Mode</td>
+                                            <td>
+                                                <select id="analog0modeDropdown" class="form-control">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Force</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog0force">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Low Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog0lowLimit">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>High Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog0highLimit">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="analog1">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Mode</td>
+                                            <td>
+                                                <select id="analog1modeDropdown" class="form-control">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Force</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog1force">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Low Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog1lowLimit">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>High Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog1highLimit">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="analog2">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Mode</td>
+                                            <td>
+                                                <select id="analog2modeDropdown" class="form-control">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Force</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog2force">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Low Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog2lowLimit">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>High Limit</td>
+                                            <td>
+                                                <input type="text" class="form-control" id="analog2highLimit">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5%; margin-bottom: 3%">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button id="cancel" type="button" style="border-radius:0px" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-0">
+                        <button id="saveData" type="button" style="border-radius:0px" class="btn btn-success btn-block" onclick="saveModifiedTest()" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

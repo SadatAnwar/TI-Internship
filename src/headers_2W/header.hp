@@ -1,0 +1,18 @@
+// Make all necessary imports//
+
+// ***************************************
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+
+#include "/root/benchDebugger/src/headers_2W/global.hp"
+#include "/root/benchDebugger/src/headers_2W/timings.hp"
+#include "/root/benchDebugger/src/headers_2W/jtag.hp"
+#include "/root/benchDebugger/src/headers_2W/tclk.hp"
+
+
+// Enable the OCP to make sure the PRU has access to RAM and other peripherals
+
+START:
+
+// Real commands start here
+

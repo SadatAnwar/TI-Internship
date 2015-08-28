@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Bench Debugger TI - Memory Files</title>
+    <include-page>/pages/views/common-headder.html</include-page>
+</head>
+<body>
+<include-page>/pages/views/nav-side.html</include-page>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-offset-2 col-sm-offset-2 col-xs-offset-0 vcenter">
+            <div class="content">
+                <h1 class="page-header center" style="text-align:center">Log files, click to download</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 col-md-offset-2 col-sm-offset-2 col-xs-offset-0 vcenter">
+            <table class="table table-bordered">
+                <tbody id='output'>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    /*
+     OO Javascript page. The Page class is basically the class for all the page functions. On Load the class is initialized and
+     its onLoad is called
+     */
+    var Page = {
+        onLoad : function(){
+            var data = {
+                'function_id': 'getFilesInFolder',
+                'param1': 'FrameFiles'
+            };
+            var logPage = this;
+            $.get('/', data, function (return_value) {
+                var result = JSON.parse(return_value);
+                logPage.updateList(JSON.parse(result.Result));
+            });
+        },
+        updateList: function (files) {
+            this.files = files;
+            this.output = document.getElementById('output');
+            this.output.innerHTML = '';
+            if (files.length == 0){
+                var text = document.createTextNode('No files on server');
+                this.output.appendChild(text);
+                this.output.appendChild(document.createElement('br'));
+            }
+            else{
+                for (var i = 0; i < files.length; i++) {
+                    var row = document.createElement('tr');
+                    var col1 = document.createElement('td');
+                    col1.appendChild(document.createTextNode(files[i]));
+                    row.appendChild(col1);
+                    var link = document.createElement('a');
+                    link.setAttribute('href', '/memory_files/'+files[i]);
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('class', 'btn btn-success btn-block');
+                    link.appendChild(document.createTextNode('download'));
+                    var col2 = document.createElement('td');
+                    col2.appendChild(link);
+                    row.appendChild(col2);
+                    var col3 = document.createElement('td');
+                    var deleteBtn = document.createElement('button');
+                    deleteBtn.setAttribute('class', 'btn btn-danger btn-block');
+                    deleteBtn.setAttribute('onclick', 'call_GET(\'deleteFilesInFolder\', \'FrameFiles\', \''+files[i]+'\')');
+                    deleteBtn.appendChild(document.createTextNode('delete'));
+                    col3.appendChild(deleteBtn);
+                    row.appendChild(col3);
+                    this.output.appendChild(row);
+                }
+            }
+        }
+    };
+    Page.onLoad();
+    function onPageLoad(){
+        Page.onLoad();
+    }
+</script>
+</html>

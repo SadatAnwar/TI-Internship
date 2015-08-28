@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Bench Debugger TI</title>
+    <include-page>/pages/views/common-headder.html</include-page>
+    <script type="text/javascript" src="/src/js/setupPage.js"></script>
+    <style>
+        /* Custom container */
+
+        .container-full {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .scrollable-menu {
+            height: auto;
+            max-height: 500px;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body onload="onPageLoad()">
+    <div class="container-full">
+        <include-page>/pages/views/nav-side.html</include-page>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-4 vcenter">
+                    <div id='pageTitle' class="content">
+                        <h1  class="page-header center" style="text-align:center">Setup Page</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:5%">
+                <!--First row of items-->
+                <div class="col-xs-4  col-sm-offset-3">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#FRAMSetup">FRAM Setup</button>
+                </div>
+                <div class="col-xs-4 col-xs-offset-0">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ADCSetup">ADC Setup</button>
+                </div>
+                <!--End of first row of items-->
+            </div>
+            <div class="row" style="margin-top:5%">
+                <div class="col-xs-4  col-sm-offset-3">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#IDDSetup">IDD</button>
+                </div>
+                <div class="col-xs-4 col-xs-offset-0">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ODPSetup">ODP</button>
+                </div>
+            </div>
+            <div class="row" style="margin-top:5%">
+                <div class="col-xs-4  col-sm-offset-3">
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#generalSetup">General</button>
+                </div>
+
+            </div>
+            <div class="row" style="margin-top:5%">
+                <div class="col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-4 vcenter">
+                    <div class="content">
+                        <button type="button" class="btn btn-danger btn-block" onclick="restartServer()">Restart Server</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- include  Modal Content general-->
+        <include-page>/pages/views/setupModalGeneral.html</include-page>
+        <!-- include Modal Content FRAM-->
+        <include-page>/pages/views/setupModalFRAM.html</include-page>
+    </div>
+</body>
+<script type="text/javascript">
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        document.getElementById('ATPTestTemplateUpload').addEventListener('change', uploadATPTestTemplate, false);
+        document.getElementById('ATPMemWriteTemplateUpload').addEventListener('change', uploadATPMemWriteTemplate, false);
+        document.getElementById('memDumpUpload').addEventListener('change', uploadMemDump, false);
+    } else {
+        alert('The File APIs are not fully supported by your browser.');
+    }
+</script>
+
+</html>

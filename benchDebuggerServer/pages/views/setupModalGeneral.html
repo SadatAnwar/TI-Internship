@@ -1,0 +1,39 @@
+<!-- Modal Content General Setup-->
+<div id="generalSetup" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#eeeeff">
+            <div class="modal-body">
+                <div class="row" style="margin-top:5%">
+                    <div class="col-xs-8  col-xs-offset-2">
+                        <span class="list-group-item active" style="text-align:center;">User Settings</span>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="usr">Username:</label>
+                                        <input type="text" class="form-control" id="usr" placeholder="Username">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="pwd">Password:</label>
+                                        <input type="password" class="form-control" id="pwd" placeholder="password">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10%">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button id="saveData" type="button" style="border-radius:0px" class="btn btn-danger btn-block" onclick="saveUserSetting()" data-dismiss="modal">Save</button>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-0">
+                        <button id="general_cancel" type="button" style="border-radius:0px" class="btn btn-success btn-block" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Content End-->
+</div>

@@ -1,0 +1,47 @@
+#ifndef _TIMINGS_SIGNAL_
+#define _TIMINGS_SIGNAL_
+
+#include "/root/benchDebugger/src/headers_4W/global.hp"
+
+
+
+// ***************************************
+// *      Timing Definitions             *
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+.macro FIX1US
+.mparam signal, loop =1
+    LDI R30.b0, signal
+    MOV TIMER_LOOP, 96
+    MOV SIGNAL_LOOP, loop
+    CALL FIXUS_LOOP
+.endm
+
+FIXUS:
+	LDI TIMER_LOOP, 98
+	MOV TIMER_LOOP, TIMER_LOOP 						// A 5ns wait to equalize the loop
+	MOV TIMER_LOOP, TIMER_LOOP 						// A 5ns wait to equalize the loop
+FIXUS_LOOP:
+	SUB TIMER_LOOP, TIMER_LOOP, 1
+	QBNE FIXUS_LOOP, TIMER_LOOP, 0
+	SUB SIGNAL_LOOP, SIGNAL_LOOP, 1
+	QBNE FIXUS, SIGNAL_LOOP, 0
+RET
+
+///!!!!!!!!!!! TO BE SURE TO USE WHEN TIMER_LOOP IS 1 !!!!!!!!//////////
+WAIT_NS:
+	SUB TIMER_LOOP, TIMER_LOOP, 1
+	QBNE WAIT_NS, TIMER_LOOP, 0
+RET
+
+
+FIX100NS:
+	LDI TIMER_LOOP, 8
+FIX100NS_LOOP:
+	SUB TIMER_LOOP, TIMER_LOOP, 1
+	QBNE FIX100NS_LOOP, TIMER_LOOP, 0
+	LDI TIMER_LOOP, 1
+	RET
+
+
+#endif //_TIMINGS_SIGNAL_

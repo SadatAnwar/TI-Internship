@@ -1,0 +1,22 @@
+//#include "FRAM_template.edt"
+/*******************************************************************/
+/*            J750 Specific Vector Statements                      */
+/*******************************************************************/
+/*  generated with Scr2SCR pattern converter                       */
+/*******************************************************************/
+#include "..\..\std_controls.h"
+vector ( $tset, TEST, TCK, TMS, TDI, TDO, RST     )
+{
+//                                   T T T T T R
+//                                   E C M D D S
+//                                   S K S I O T
+//                                   T          
+//                                              
+//; Header_Start==================================================================
+//;
+//; Description:
+//; FRAM template
+//;
+//; Revision:
+//; 1.0, Peter Blass, 13.05.2013, init version
+//; Header_End====================================================================

@@ -1,0 +1,39 @@
+#ifndef _GLOBAL_HP_
+#define _GLOBAL_HP_
+
+.setcallreg R0.w0
+.origin 0
+.entrypoint START
+
+// ***************************************
+// *    Global Variable definitions      *
+// ***************************************
+
+// Refer to this mapping in the file - \prussdrv\include\pruss_intc_mapping.h
+#define PRU0_PRU1_INTERRUPT     17
+#define PRU1_PRU0_INTERRUPT     18
+#define PRU0_ARM_INTERRUPT      19
+#define PRU1_ARM_INTERRUPT      20
+#define ARM_PRU0_INTERRUPT      21
+#define ARM_PRU1_INTERRUPT      22
+#define SICR_OFFSET             0x24
+
+// Register allocations
+#define INPUT_SIGNAL_B0         R2.b0
+#define INPUT_SIGNAL_B1         R2.b1
+#define INPUT_SIGNAL_W0         R2.w0
+#define INPUT_SIGNAL            R2
+#define TIMER_LOOP              R3
+#define SIGNAL_LOOP             R4
+#define READER_READY            R31.t6
+#define DATA_READY            	R30.t5
+#define DATA_RECEIVED          	R31.t7
+
+///////////////////////////////////////////////////////////////////////////////////
+
+JMP START                               // Jump to the start of the code (Skip all procedures)
+
+
+
+#endif //_GLOBAL_HP_
+

@@ -1,0 +1,103 @@
+// ***************************************
+// *    Global Variable definitions      *
+// ***************************************
+.origin 0
+.entrypoint SETUP
+
+// Refer to this mapping in the file - \prussdrv\include\pruss_intc_mapping.h
+#define PRU0_PRU1_INTERRUPT     17
+#define PRU1_PRU0_INTERRUPT     18
+#define PRU0_ARM_INTERRUPT      19
+#define PRU1_ARM_INTERRUPT      20
+#define ARM_PRU0_INTERRUPT      21
+#define ARM_PRU1_INTERRUPT      22
+#define SICR_OFFSET             0x24
+#define DATA_TDO                R31.t15
+#define READER_READY            R30.t15
+#define DATA_READY            	R31.t14
+#define DATA_RECEIVED          	R30.t14
+#define TEMP_DATA_REG       	R2
+#define TEMP_DATA_REG_W0       	R2.w0
+#define TEMP_DATA_REG_W1       	R2.w1
+#define DATA_COUNTER          	R3.b0
+#define RAM_POINTER          	R3.w1
+#define DATA_LENGTH             32
+#define BYTES_TO_WRITE          4
+
+
+SETUP:
+    LBCO r0, C4, 4, 4
+    CLR  r0, r0, 4
+    SBCO r0, C4, 4, 4
+
+    MOV  r0, 0x0120
+    MOV  r1, 0x00022028                 //Set C24 to point to RAM
+    SBBO r0, r1, 0, 4
+
+    MOV TEMP_DATA_REG, 0x12abcdef
+    MOV RAM_POINTER, 0
+
+    SBCO TEMP_DATA_REG, c24, RAM_POINTER, BYTES_TO_WRITE
+    ADD RAM_POINTER, RAM_POINTER, BYTES_TO_WRITE
+
+    MOV TEMP_DATA_REG, 0x00000000
+    LDI DATA_COUNTER, DATA_LENGTH
+    CLR DATA_RECEIVED
+
+
+
+RECEIVER_LOOP:
+    SET READER_READY
+    WBS DATA_READY
+    CLR READER_READY
+
+    QBBS SAVE_IN_HIGH, DATA_TDO
+
+    // Handle input LOW
+    QBBS END_OF_RECEIVE, R31.t30                // Check for end of receive signal
+
+    QBNE AFTER_TRANSFER_TO_RAM_LOW, DATA_COUNTER, 0
+    SBCO TEMP_DATA_REG, c24, RAM_POINTER, BYTES_TO_WRITE
+    MOV TEMP_DATA_REG, 0x00000000
+    LDI DATA_COUNTER, DATA_LENGTH
+    ADD RAM_POINTER, RAM_POINTER, BYTES_TO_WRITE
+
+AFTER_TRANSFER_TO_RAM_LOW:
+    SUB DATA_COUNTER, DATA_COUNTER, 1
+    LSL TEMP_DATA_REG, TEMP_DATA_REG, 1
+    WBC DATA_READY
+    CLR DATA_RECEIVED
+    JMP RECEIVER_LOOP
+
+SAVE_IN_HIGH:
+// Handle input HIGH
+    QBBS END_OF_RECEIVE, R31.t30
+
+    QBNE AFTER_TRANSFER_TO_RAM_HIGH, DATA_COUNTER, 0
+    SBCO TEMP_DATA_REG, c24, RAM_POINTER, BYTES_TO_WRITE
+    MOV TEMP_DATA_REG, 0x00000000
+    LDI DATA_COUNTER, DATA_LENGTH
+    ADD RAM_POINTER, RAM_POINTER, BYTES_TO_WRITE
+AFTER_TRANSFER_TO_RAM_HIGH:
+    SUB DATA_COUNTER, DATA_COUNTER, 1
+    LSL TEMP_DATA_REG, TEMP_DATA_REG, 1
+    ADD TEMP_DATA_REG, TEMP_DATA_REG, 1
+    WBC DATA_READY
+    CLR DATA_RECEIVED
+    SET READER_READY
+    JMP RECEIVER_LOOP
+
+
+END_OF_RECEIVE:
+    LDI	    R4.w0,	PRU1_PRU0_INTERRUPT
+    SBCO	R4,	C0 ,SICR_OFFSET, 4           //Clear the interrupt
+    CLR DATA_RECEIVED
+    SBCO TEMP_DATA_REG, c24, RAM_POINTER, BYTES_TO_WRITE  // send the data received to RAM
+    MOV TEMP_DATA_REG, 0xabcdef12
+    ADD RAM_POINTER, RAM_POINTER, BYTES_TO_WRITE
+    SBCO TEMP_DATA_REG, c24, RAM_POINTER, BYTES_TO_WRITE
+    MOV R31.b0, PRU0_ARM_INTERRUPT+16   // Send notification to Host for program completion
+HALT
+
+
+

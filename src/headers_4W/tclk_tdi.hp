@@ -1,0 +1,75 @@
+#ifndef _TCLK_TDI_SIGNAL_
+#define _TCLK_TDI_SIGNAL_
+
+#include "/root/benchDebugger/src/headers_4W/global.hp"
+
+
+
+// ***************************************
+// *    TCLK_TDI   Definitions       	 *
+// *     Author  Sadat Anwar 2015		 *
+// ***************************************
+
+
+.macro TCLK_SET_TDI
+.mparam signal
+	LDI INPUT_SIGNAL_B0, signal		//set TDI to high and save in the INPUT_SIGNAL register
+    JAL R9.w0, TCLK_SET_CALL
+.endm
+
+
+TCLK_SET_CALL:
+ 	SET R30.t2						//at 10 ns set TDI (leave all other signals unchanged)
+ 	MOV R30.b0, INPUT_SIGNAL_B0		//at 15 ns give it all signals (The TDI should be 1 from before)
+
+	LDI TIMER_LOOP, 3				//Set loop counter to 3 (5ns)
+	CALL WAIT_NS					//Will wait 40 ns ( Loop counter * 10 + 10)
+	LDI TIMER_LOOP, 1
+	LDI TIMER_LOOP, 1
+
+	SET R30.t2  			    	// Set the clock according to signal (high if present)
+
+
+	LDI TIMER_LOOP, 1
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+ 	JMP R9.w0						//Store return value in R9.w0
+
+
+.macro TCLK_CLR_TDI
+.mparam signal, loop=1
+	LDI INPUT_SIGNAL_B0, signal		//set TDI to high and save in the INPUT_SIGNAL register
+    JAL R9.w0, TCLK_CLR_CALL
+.endm
+
+
+TCLK_CLR_CALL:
+ 	CLR R30.t2						// at 10 ns set TDI (leave all other signals unchanged)
+ 	MOV R30.b0, INPUT_SIGNAL_B0		// at 15 ns give it all signals (The TDI should be 0 from before)
+
+	LDI TIMER_LOOP, 3				// Set loop counter to 3 (5ns)
+	CALL WAIT_NS					//Will wait 40 ns ( Loop counter * 10 + 10)
+	LDI TIMER_LOOP, 1
+	LDI TIMER_LOOP, 1
+
+	SET R30.t2  			    	// Set TDI (Return HIGH)
+
+	LDI TIMER_LOOP, 1
+	CALL WAIT_NS
+	LDI TIMER_LOOP, 1
+ 	JMP R9.w0						//Store return value in R9.w0
+
+
+.macro TCLK_STATIC
+.mparam signal, loop=1
+	LDI INPUT_SIGNAL_B0, signal
+	JAL R9.w0, TCLK_STATIC_CALL
+.endm
+
+TCLK_STATIC_CALL:
+	MOV R30.b0 , INPUT_SIGNAL_B0
+	CALL FIX100NS
+	JMP R9.w0
+
+
+#endif //_TCLK_TDI_SIGNAL_
