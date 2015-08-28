@@ -49,9 +49,6 @@ folderTypes = {'Flows': 'flows',
 executeTest = True
 testExecutionInProgress = False
 
-
-
-
 def executeTestThread(UID, logFileName, executionTimes, executionDelay):
     """This function executes the test for more than one times, the test is stopped by setting the
     executeTest boolean to false, this will prevent the loop form starting next time. since this loops the
