@@ -254,6 +254,7 @@ def executeTestSequence(UID, executionTimes, executionDelay):
     return 'OK', ''
 
 #Line added in branch1
+#Line added in branch1
 def stopRunningTest():
     global executeTest
     executeTest = False
