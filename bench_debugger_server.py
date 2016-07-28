@@ -253,7 +253,7 @@ def executeTestSequence(UID, executionTimes, executionDelay):
         return 'Error: %s' % e, ''
     return 'OK', ''
 
-
+#Line added in branch1
 def stopRunningTest():
     global executeTest
     executeTest = False
